@@ -1,18 +1,17 @@
 from rest_framework import serializers
 
-from .models import Profile
+from .models import User
 
-class SenderProfileSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Profile
-        fields = ['user',]
-        read_only_fields = ['is_sender']
+        model = User
+        fields = ['username', 'password']
 
-class BuyerProfileSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Profile
-        fields = ['user', ]
-        read_only_fields = ['is_sender']
+    def create(self, validated_data):
+        new_user = User(username=validated_data['username'])
+        new_user.set_password(validated_data['password'])
+        new_user.save()
+        return new_user
 
 
 

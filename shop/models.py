@@ -23,4 +23,4 @@ class Order(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'Order {self.item.name} buyer {self.profile.user.name}'
+        return f'Order {self.item.name} buyer {self.profile.user.username}'
